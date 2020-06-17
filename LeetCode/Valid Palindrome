@@ -1,0 +1,26 @@
+class Solution {
+public:
+    bool isPalindrome(string s) {
+        string tempStr;
+        
+        for (int i{}; i < s.length(); i ++)
+            if (isalnum(s[i]))
+                tempStr += tolower(s[i]); // Remove all non alphanumeric characters
+                
+        auto ptr1 = tempStr.begin(); // Create two pointers which run from the begining and end of the new string
+        auto ptr2 = tempStr.end() -1;
+        
+
+        for (; ptr1 != tempStr.end(); ptr1++, ptr2--) {
+            if (*ptr1 != *ptr2) { // If they do not hold the same value then this is not a palindrome
+                cout << *ptr1 << " " << *ptr2;
+                return false;
+                
+            }
+
+        }
+        
+        return true;
+        }
+        
+};
