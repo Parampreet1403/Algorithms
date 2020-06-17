@@ -1,0 +1,19 @@
+class Solution {
+public:
+    void rotate(vector<int>& nums, int k) {
+        auto copyVec = nums;
+        int size = nums.size();
+        
+        for (int i{}; i < size; i++) {
+            int x = i+k;
+            if (x >= size) {
+                while (x >= size) {
+                    x = x - size;
+                }
+                nums[x] = copyVec[i];
+            }
+            else 
+                nums[x] = copyVec[i];
+        }
+    }
+};
