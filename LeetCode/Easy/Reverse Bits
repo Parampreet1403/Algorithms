@@ -1,0 +1,17 @@
+class Solution {
+public:
+    uint32_t reverseBits(uint32_t n) 
+    {
+        string ansStr;
+        
+        for (int i{}; i < 32; i++) 
+        {
+            if( (n & (1 << i) )) // if n is 1 it will return true(1)
+               ansStr.push_back('1'); // pushback a 1
+            else ansStr.push_back('0'); // pushback a 0
+        }
+
+        uint32_t ans = stol(ansStr, nullptr, 2); // Converts string binary to long int
+        return ans;
+    } 
+};
