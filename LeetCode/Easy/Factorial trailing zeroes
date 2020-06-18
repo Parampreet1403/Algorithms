@@ -1,0 +1,12 @@
+class Solution {
+public:
+int trailingZeroes(int n) {
+    int count{};
+    while (n) {
+        count += n / 5; // each division of 5 is a trailing zero
+        n /= 5; // Keep dividing by 5
+    }
+    return count ; 
+
+     }
+};
