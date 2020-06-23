@@ -1,0 +1,35 @@
+class Solution {
+public:
+    bool isValid(string s) {
+	std::vector<char> container{};
+
+	for (int i{}; i < s.length(); i++) 
+	{
+		if ((s[i] == '(' || s[i] == '{' || s[i] == '['))
+		{
+			container.push_back(s[i]);
+		}
+
+		else 
+		{
+			if (!container.empty())
+			{
+				if (container.back() == '(' && s[i] == ')')
+					container.pop_back();
+
+				else if (container.back() == '{' && s[i] == '}')
+					container.pop_back();
+
+				else if (container.back() == '[' && s[i] == ']')
+					container.pop_back();
+				
+				else container.push_back(s[i]);
+			}
+            else container.push_back(s[i]);
+		}
+	}
+
+        return container.empty();
+        
+    }
+};
