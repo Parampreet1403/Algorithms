@@ -1,0 +1,30 @@
+#include <iostream>
+#include <vector>
+
+int main() {	
+	char input[] = "I like Racecar";
+	int size = strlen(input);
+	char* start, *end;
+	char temp;
+	
+	start = input; // Pointer to begining of string
+	end = &input[size - 1]; // Pointer to end of string
+
+	std::cout << "Original: " << input << std::endl;
+
+	while (start < end)
+	{
+		temp = *start;
+
+		// Reverse Characters
+		*start = *end;
+		*end = temp;
+
+		// Advance Pointers
+		start++;
+		end--;
+	} 
+
+	std::cout << "Reversed: " << input << std::endl;
+	return 0;
+}
