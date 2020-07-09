@@ -1,0 +1,38 @@
+class Solution {
+public:
+    void merge(vector<int>& nums1, int m, vector<int>& nums2, int n) {
+        
+        int size = m + n;
+        int i_size = nums1.size();
+        int d_size = i_size - m;
+        int it1 = m;
+        int count{};
+        bool Flag{};
+        
+        if (nums2.size() != 0)
+            Flag = true;
+        
+        if (Flag) {
+
+            if (d_size > 0) {
+                for (it1; it1 < i_size; it1++) {
+                    nums1[it1] = nums2[count];
+                    count++;
+                }
+            }
+            else {
+                for (int i{}; i < size; i++) {
+                    if (nums1[i] == 0) {
+                        nums1[i] = nums2[count];
+                        count++;
+                    }
+                }
+            }
+        }
+
+
+        std::sort(nums1.begin(), nums1.begin() + size);
+        
+    
+    }
+};
