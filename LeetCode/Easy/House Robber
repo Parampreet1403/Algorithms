@@ -1,0 +1,23 @@
+class Solution {
+public:
+    int rob(vector<int>& nums) {
+    if (nums.size() == 0)
+		return 0;
+	else if (nums.size() == 1)
+		return nums[0];
+	else if (nums.size() == 2)
+		return std::max(nums[0], nums[1]);
+
+	std::vector<int> runningTotal{};
+	runningTotal.push_back(nums[0]);
+	runningTotal.push_back(std::max(nums[0], nums[1]));
+
+	for (int i{2}; i < nums.size(); i++) {
+		runningTotal.push_back(std::max(nums[i] + runningTotal[i - 2], runningTotal[i - 1])); // Algorithm
+	}
+
+	return runningTotal.back();
+
+        
+    }
+};
