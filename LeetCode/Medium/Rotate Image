@@ -1,0 +1,25 @@
+class Solution {
+public:
+    void rotate(vector<vector<int>>& matrix) {
+        int length = matrix.size();
+        
+        // Transpose
+        for (int row{}; row < length; row ++) {
+            for (int column{row};  column < length; column++) {
+                int temp = matrix[row][column];
+                matrix[row][column] = matrix[column][row];
+                matrix[column][row] = temp;
+            }
+        }
+        
+        // Swap
+        for (int row{}; row < length; row ++) {
+            for (int column{};  column < length/2; column++) {
+                int temp = matrix[row][column];
+                matrix[row][column] = matrix[row][length - 1 - column];
+                matrix[row][length - 1 - column] = temp;
+            }
+        }
+        
+    }
+};
