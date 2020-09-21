@@ -1,0 +1,32 @@
+// Recusrion  
+int fibR(int N)
+{
+	// Base cases
+	if (N == 0) return 0;
+	if (N == 1) return 1;
+
+	return fibR(N - 1) + fibR(N - 2);
+}
+
+// Itterative - Faster
+int fibI(int N)
+{
+	// Base cases
+	if (N == 0) return 0;
+	if (N == 1) return 1;
+
+	int a = 0; // first element 
+	int b = 1; // second element 
+	int sum = a + b;
+
+	while (N > 1)
+	{
+		// semi - dynamic programming 
+		sum = a + b;
+		a = b;
+		b = sum;
+
+		N--;
+	}
+	return sum;
+}
