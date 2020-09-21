@@ -1,0 +1,26 @@
+class Solution {
+public:
+    int numDecodings(string s) {
+        
+        		int nLength = s.length();
+	std::vector<int> vSolution(nLength + 1); // Vector can include 0th element
+
+	// Base cases
+	vSolution[0] = 1; // Needed as we look for current solution through previous answers
+	if (s[0] == '0') vSolution[1] = 0;
+	else vSolution[1] = 1; // Decode string of length 1 -> one way 
+
+	for (int i = 2; i <= nLength; i++) // i represents length of the string 
+	{
+		// Extract information 
+		int nSingleDigit = std::stoi(s.substr(i - 1, 1));
+		int nDoubleDigit = std::stoi(s.substr(i - 2, 2));
+
+		// Constraints 
+		if (nSingleDigit > 0) vSolution[i] += vSolution[i - 1];
+		if (nDoubleDigit >= 10 && nDoubleDigit <= 26) vSolution[i] += vSolution[i - 2];
+
+	}
+        
+    return vSolution[nLength];}
+};
