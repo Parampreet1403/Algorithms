@@ -1,0 +1,21 @@
+class Solution {
+public:
+    int climbStairs(int n) {
+        
+        // Base case
+        if (n == 1) return 1;
+
+        // Dynamic programming
+        std::vector<int> dp(n + 1);
+        dp[0] = 0;
+        dp[1] = 1;
+        dp[2] = 2;
+        
+        for (int i=3; i <= n; i++) {
+            /* To get to this stair is the sum of getting to the previous two stairs
+            as the number you can climb is two */
+            dp[i] = dp[i-1] + dp[i-2];
+        }
+        
+    return dp[n];}
+};
