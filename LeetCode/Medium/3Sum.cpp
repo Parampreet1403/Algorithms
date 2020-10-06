@@ -1,3 +1,50 @@
+// 06/10/2020 
+// Another solution
+
+class Solution {
+public:
+    vector<vector<int>> threeSum(vector<int>& nums) {
+	int target{ 0 };
+	std::vector<std::vector<int>> answer;
+
+	// Create sorted vector
+	std::sort(nums.begin(), nums.end());
+	int size = nums.size();
+
+	// Loop through vector
+	for (int i{}; i < size - 2; i++)
+	{
+		// Create pointers
+		int* left = &nums[i + 1];
+		int* right = &nums[nums.size() - 1];
+
+		// Check for possible solutions
+		while (left < right)
+		{
+			int sum = nums[i] + *left + *right;
+
+			if (sum < target) left++; // Increase sum
+			else if (sum > target) right--; // Decrease sum
+			else // Found a solution
+			{
+				std::vector<int> solution;
+				solution.push_back(nums[i]); // 0
+				solution.push_back(*left); // 1
+				solution.push_back(*right); // 2
+				answer.push_back(solution);
+
+				// Duplicate check of pointers
+				while (left < right && *left == solution[1]) left++;
+				while (left < right && *right == solution[2]) right--;
+			}
+			// Duplicate check of current value
+			while (i + 1 < nums.size() && nums[i] == nums[i + 1]) i++;
+		}
+	}
+	return answer;}
+};
+
+
 // Parampreet Singh - 23/05/20
 // LeetCode Medium (15) 3Sum
 
