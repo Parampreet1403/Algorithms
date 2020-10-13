@@ -1,0 +1,14 @@
+class Solution {
+public:
+    int maxProfit(vector<int>& prices) {
+        int profit{};
+        
+        for (int i{}; i < prices.size() - 1; i++)
+        {
+            if (prices[i+1] > prices[i])
+                profit += prices[i+1] - prices[i];
+        }
+        
+    return profit;}
+
+};
