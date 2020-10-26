@@ -1,0 +1,81 @@
+#include <iostream>
+#include <string>
+#include <vector>
+#include <algorithm> 
+#include <sstream>
+#include <unordered_map>
+#include <map>
+#include <set>
+
+#define PI 3.14159265
+
+// LeetCode 1086
+void highFive(std::vector<std::vector<int>> items)
+{
+    std::map<int, std::multiset<int>> map;
+    for (auto item : items)
+    {
+        // Creates map of id and scores
+        int id = item[0];
+        int score = item[1];
+        auto itr = map.find(id);
+        if (itr != map.end()) // Finds key
+        {
+            map[id].insert(score);
+        }
+        else // Does not find key
+        {
+            std::multiset<int> mySet{ score };
+            std::pair<int, std::multiset<int>> pair = { id, mySet };
+            map.insert(pair);
+        }
+    }
+
+    // Loop through map to find average for id
+    auto mapItr = map.begin();
+    std::vector<int> ans{};
+    for (mapItr; mapItr != map.end(); mapItr++)
+    {
+        auto setItr = (mapItr->second.end());
+        setItr--;
+        int avg{};
+        int limit;
+        int size = mapItr->second.size();
+        if (size > 5) limit = 5;
+        else limit = size;
+        for (int i{}; i < limit; i++)
+        {
+            avg += *setItr;
+            setItr--;
+        }
+        ans.push_back(avg / limit);
+    }
+
+    //Print solution
+    for (auto x : ans)
+        std::cout << x << std::endl;
+
+}
+
+using namespace std;
+
+int main() {
+    std::vector<std::vector<int>> input
+        { {1, 91}, 
+        {1, 92}, 
+        {2, 93}, 
+        {2, 97}, 
+        {1, 60}, 
+        {2, 77}, 
+        {1, 65}, 
+        {1, 87}, 
+        {1, 100}, 
+        {2, 100}, 
+        {2, 76} };
+    highFive(input);
+
+
+
+    return 0;
+}
+
