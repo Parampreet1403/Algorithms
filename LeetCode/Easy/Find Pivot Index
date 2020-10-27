@@ -1,0 +1,27 @@
+class Solution {
+public:
+    int pivotIndex(vector<int>& nums) {
+        
+        // totalSum - leftSum - nums[i] = leftSum
+        // (totalSum - leftSum) - pivotPoint = rightSum
+        // (28 - [1 + 7 + 3]) - 6 = (5, 6)
+        // (28 - 11) - 6 = 11
+        // 11 = 11
+        
+        // Find total sum
+        int totalSum{};
+        for(auto x : nums)
+            totalSum += x;
+        
+        int leftSum{};
+        for (int i{}; i < nums.size(); i++)
+        {
+            if (totalSum - leftSum - nums[i] == leftSum)
+                return i;
+            else leftSum += nums[i];
+        }
+        
+        return -1;
+        
+    }
+};
