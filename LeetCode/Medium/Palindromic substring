@@ -1,0 +1,59 @@
+class Solution {
+public:
+    int countSubstrings(string s) {
+        
+        int length = s.length();
+        int result{};
+        
+        for(int i{}; i < length; i++) // Loops through entire string
+        {
+            result += findP(s, i, i, length);
+            result += findP(s, i, i+1, length);
+        }
+        
+        return result; 
+    }
+    
+    // Helper Function
+    // Finds every possible palindrome in string
+    int findP(string s, int l, int r, int n)
+    {
+        // Picks element in string and expands outwards
+        int temp{};
+        while(l >= 0 && r <= n-1)
+        {
+            if (s[l] == s[r])
+            {
+                l--;
+                r++;
+                temp++; // Palindrome count
+            }
+            else break;
+        }
+
+        return temp;
+    }
+};
+
+// aabaa
+/*
+
+i = 0
+l=0, r=0
+a, a x1
+l=0, r=1
+a, a x2
+
+i = 1
+l=1, r=1
+a, a x3
+l=0, r=2
+a, b
+
+l=1, r =2
+a, b
+
+https://www.youtube.com/watch?v=ze1woFTZMpA&ab_channel=SankalpDayal
+
+
+*/
