@@ -1,0 +1,20 @@
+class Solution {
+public:
+    int maxArea(vector<int>& height) {
+        int i{};
+        int j = height.size() - 1;
+        int area = 0;
+        // Go through loop
+        while(i < j)
+        {
+            int min = std::min(height[i], height[j]); // find limiting height
+            area = std::max(area, (min * (j-i))); // compare to previous max
+            
+            // Traverse limiting height
+            if (height[i] < height[j]) i++;
+            else j--;
+        }
+        
+        return area;
+    }
+};
