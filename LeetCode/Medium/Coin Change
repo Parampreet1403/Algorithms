@@ -1,0 +1,37 @@
+class Solution {
+public:
+    int coinChange(vector<int>& coins, int amount) {
+        
+        std::sort(coins.begin(), coins.end());
+        
+        // Create my DP Array
+        std::vector<int> dp;
+        for (int i{}; i <= amount; i++)
+        {
+            dp.push_back(amount + 1);
+        }
+        
+        // Set my Initial Case
+        dp[0] = 0;
+        
+        // Loop through amount 
+        for (int i{}; i <= amount; i++)
+        {
+            for(int j{}; j < coins.size(); j++) // Loop through coins
+            {
+                if (coins[j] <= i) // If my coin is smaller than the amount I need to make
+                {
+                    dp[i] = std::min(dp[i], 1+ dp[i - coins[j]]); // Finds least amount of coins
+                }
+                else break;
+            }
+        }
+        
+        if (dp[amount] < amount +1) return dp[amount];
+        else return -1;
+        
+ 
+        
+        
+    }
+};
