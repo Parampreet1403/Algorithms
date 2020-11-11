@@ -1,0 +1,25 @@
+class Solution {
+public:
+    int minCost(string s, vector<int>& cost) {
+        int n = s.length();
+        int gsum{};
+        int gmax{};
+        int ans{};
+        
+        for (int i {}; i < n; i++)
+        {
+            if (i > 0 && s[i] != s[i-1])
+            {
+                ans += gsum - gmax;
+                gsum = 0;
+                gmax = 0;
+            }
+            
+            gsum += cost[i];
+            gmax = std::max(gmax, cost[i]);
+        }
+        
+        ans += gsum - gmax;
+        return ans;
+    }
+};
