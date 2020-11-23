@@ -1,0 +1,42 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+class Solution {
+public:
+    int balancedHeight(TreeNode* root)
+    {
+        // Base Case
+        if (root == nullptr) return 0;
+        
+        int leftHeight{};
+        int rightHeight{};
+        
+
+        
+        // Traverse LR
+        if (root->left != nullptr) leftHeight = balancedHeight(root->left);
+        if (root->right != nullptr) rightHeight = balancedHeight(root->right);
+        
+        // Pass up inbalanced tree
+        if (leftHeight == -1 || rightHeight == -1) return -1;
+        // Check if tree is inbalanced
+        if (abs(leftHeight - rightHeight) > 1) return -1;
+        // Balanced tree
+        return std::max(leftHeight, rightHeight) +1;
+    }
+    
+    bool isBalanced(TreeNode* root) {
+        // -1 indicates unabalnced tree
+        if (balancedHeight(root) != -1) return true;
+        else return false;
+
+    }
+};
