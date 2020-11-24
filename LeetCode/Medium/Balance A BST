@@ -1,0 +1,48 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+class Solution {
+public:
+    std::vector<int> tree;
+    void inOrder(TreeNode* root)
+    {
+        // Base case
+        if (root == nullptr) return;
+        
+        // LDR
+        inOrder(root->left);
+        tree.push_back(root->val);
+        inOrder(root->right);
+    }
+    
+    TreeNode* build(int left, int right)
+    {          
+        // Base case
+        if (left > right) return nullptr;
+        //if (left == right) return new TreeNode(tree[left]);
+        
+        // Variables
+        int midPoint = (right + left)/2;
+        TreeNode* root = new TreeNode(tree[midPoint]);
+        
+        // LR
+        root->left = build(left, midPoint-1);
+        root->right = build(midPoint+1, right);
+        
+        return root;
+    }
+    
+    TreeNode* balanceBST(TreeNode* root) {
+        inOrder(root); // Convert BST to ordered list 
+        int size = tree.size() - 1;
+        return build(0, size);
+    }
+};
