@@ -33,26 +33,20 @@ public:
                 current = q.front();
                 q.pop();
                 TreeNode* Node = current.first;
-                int index = current.second;
+                int index = current.second - first.second; // Take distance to prevent overflow
                 
                 // LR
                 if (Node->left != nullptr)
-                {
-                    q.push(make_pair(Node->left, 2 * index));
-                }
+                    q.push(make_pair(Node->left, 2 * index + 1));
 
                 if (Node->right != nullptr)
-                {
-                    q.push(make_pair(Node->right, 2 * index + 1));
-                }
+                    q.push(make_pair(Node->right, 2 * index + 2));
             
             }
-            
             // Find the max
             maxWidth = std::max(maxWidth, current.second - first.second + 1);
         }
         
         return maxWidth;
-        
     }
 };
