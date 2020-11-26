@@ -1,0 +1,55 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+class Solution {
+public:
+    std::vector<TreeNode*> remaining{};
+    
+    vector<TreeNode*> delNodes(TreeNode* root, vector<int>& to_delete) {
+        
+        // Create Set of to_delete to increase time efficieny
+        
+        // Recursive call
+        deleteNode(root, to_delete);
+        
+        // Check the root
+        auto ptr = std::find(to_delete.begin(), to_delete.end(),root->val);
+        if (ptr == to_delete.end()) // Did not find it
+            remaining.push_back(root);
+        
+        return remaining;
+        
+    }
+    
+    TreeNode* deleteNode(TreeNode* root, std::vector<int> toDelete)
+    {
+        // Base case
+        if (!root) return nullptr;
+        
+        // Traverse Tree LR
+        if(root->left != nullptr) root->left = deleteNode(root->left, toDelete);
+        if(root->right != nullptr) root->right = deleteNode(root->right, toDelete);
+        
+        // Check if we need to delete
+        auto ptr = std::find(toDelete.begin(), toDelete.end(), root->val);
+        if (ptr != toDelete.end()) // Need to delete
+        {
+            // Add left and right subtrees if they exist
+            if (root->left != nullptr) remaining.push_back(root->left);
+            if (root->right != nullptr) remaining.push_back(root->right);
+            root = nullptr; // Delete node
+        }
+        
+        return root;
+    }
+    
+    
+};
